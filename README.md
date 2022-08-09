@@ -28,21 +28,21 @@ RSA/SHA256
 
 RSA/SHA384
 
-RSA/SHA1
+[**RSA/SHA1**](https://ciphersuite.info/search/?singlepage=true&q=SHA1&cat=cs#)
 
 ECDSA/SHA256
 
 ECDSA/SHA384
 
-ECDSA/SHA1
+[**ECDSA/SHA1**](https://ciphersuite.info/search/?singlepage=true&q=SHA1&cat=cs#)
 
-DSA/SHA1
+[**DSA/SHA1**](https://ciphersuite.info/search/?singlepage=true&q=SHA1&cat=cs#)
 
 RSA/SHA512
 
 ECDSA/SHA512
 
-(the red highlighted line items should be deleted as they are compromised or contain weak cryptographic elements)
+(the highlighted line items should be deleted as they are compromised or contain weak cryptographic elements)
 
 **How to** [**Restrict cryptographic algorithms and protocols - Windows Server | Microsoft Docs**](https://docs.microsoft.com/en-us/troubleshoot/windows-server/windows-security/restrict-cryptographic-algorithms-protocols-schannel)
 
@@ -165,8 +165,9 @@ Get-TlsCipherSuite | Format-Table Name
 
 **Disabled insecure cipher suites - Note: The cipher suites being disabled in this list all have insecure or weak features.**
 
-| **Disable-TlsCipherSuite -Name "TLS\_DHE\_DSS\_WITH\_AES\_128\_CBC\_SHA"** |
+|PowerShell Command to disable Cipher Suite|
 | --- |
+| **Disable-TlsCipherSuite -Name "TLS\_DHE\_DSS\_WITH\_AES\_128\_CBC\_SHA"** |
 | **Disable-TlsCipherSuite -Name "TLS\_DHE\_DSS\_EXPORT1024\_WITH\_DES\_CBC\_SHA"** |
 | **Disable-TlsCipherSuite -Name "TLS\_DHE\_DSS\_WITH\_3DES\_EDE\_CBC\_SHA"** |
 | **Disable-TlsCipherSuite -Name "TLS\_DHE\_DSS\_WITH\_AES\_128\_GCM\_SHA256"** |
@@ -225,22 +226,19 @@ Note: The "SSL\00010002" registry key is controlled by a Group Policy that can b
 To configure the SSL Cipher Suite Order group policy setting
 
 1. At a command prompt, enter gpedit.msc
+   a. The Group Policy Object Editor appears.
+2.Expand Computer Configuration, Administrative Templates, Network, and then click SSL Configuration Settings.
+3. Under SSL Configuration Settings, click the SSL Cipher Suite Order setting.
+4. In the SSL Cipher Suite Order pane, scroll to the bottom of the pane.
+5. Follow the instructions labeled How to modify this setting.
+   a. String for GPO for above cipher suite order.
+                           TLS_CHACHA20_POLY1305_SHA256,TLS_AES_128_GCM_SHA256,TLS_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_PSK_WITH_AES_256_GCM_SHA384,TLS_PSK_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
 
-  1. The Group Policy Object Editor appears.
-1. Expand Computer Configuration, Administrative Templates, Network, and then click SSL Configuration Settings.
-2. Under SSL Configuration Settings, click the SSL Cipher Suite Order setting.
-3. In the SSL Cipher Suite Order pane, scroll to the bottom of the pane.
-4. Follow the instructions labeled How to modify this setting.
-
-  1. String for GPO for above cipher suite order
-
-    1. TLS\_CHACHA20\_POLY1305\_SHA256,TLS\_AES\_128\_GCM\_SHA256,TLS\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_PSK\_WITH\_AES\_256\_GCM\_SHA384,TLS\_PSK\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_DHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256
-
-1. **It is necessary to restart the computer after modifying this setting for the changes to take effect.**
+6. **It is necessary to restart the computer after modifying this setting for the changes to take effect.**
 
 
+![Registry_screenshot](https://user-images.githubusercontent.com/41805243/183712588-de920a54-3d97-4fcf-9c62-f78b1ea56e52.png)
 
-![](RackMultipart20220809-1-vaxg8b_html_647fef6d23924e47.png)
 
 Screenshot of the Registry Editor showing the Edit Multi-String dialog box for the 00010002 folder.
 
@@ -262,3 +260,4 @@ The following is a list of cipher suites that are Windows supports for TLS 1.2 a
 | **TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384** | Yes | TLS 1.2 |
 | **TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256** | Yes | TLS 1.2 |
 | **TLS\_DHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256** | Yes | TLS 1.2 |
+
